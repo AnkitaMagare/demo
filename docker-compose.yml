@@ -1,0 +1,12 @@
+version: "3.8"      # specifies docker image version
+
+services:                   # defines container
+  app:                      # nodejs container
+    build: "./"             # builds image from dockerfile
+    ports:
+      - "5000:5000"         # maps port 5000 on your PC to port 5000 in the container
+    volumes:    
+      - .:/app            # syncs local files with the container
+    environment:
+      NODE_ENV: development  
+    command: ["npx", "ts-node", "index.ts"]
