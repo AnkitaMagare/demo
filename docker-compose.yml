@@ -12,12 +12,12 @@ services:                   # defines container
     command: ["npx", "ts-node", "index.ts"]
 
 
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: user
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: neondb
+  #     POSTGRES_USER: neondb_owner
+  #     POSTGRES_PASSWORD: npg_twOXL6a4rfvF
+  #   ports:
+  #     - "5432:5432"
