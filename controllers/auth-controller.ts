@@ -3,6 +3,7 @@ import prisma from '../prisma';
 import {hashSync, compareSync} from 'bcrypt';        // used to encrypt password(hash) & compare
 import * as jwt from 'jsonwebtoken';
 import {JWT_ACCESS_SECRET, ACCESS_TOKEN_EXPIRES, JWT_REFRESH_SECRET, REFRESH_TOKEN_EXPIRES} from '../secrets'
+import { SendWelcomeEmail } from '../helper/sendEmail';
 
 
 
@@ -13,11 +14,16 @@ export const signup = async(req: Request, res: Response) => {
         res.status(400).json({error: 'user already exists'});
         return;
     }
+    // creating new user
     user = await prisma.user.create({data: {
         name,
         email,
         password: hashSync(password, 10)            // saultdata-randomly generated string added to a password before it is hashed
     }});
+
+    // send welcome email to newly created user
+    await SendWelcomeEmail(email);
+
     res.status(201).json({user})
     return;
 }
