@@ -4,10 +4,11 @@ import {hashSync, compareSync} from 'bcrypt';        // used to encrypt password
 import * as jwt from 'jsonwebtoken';
 import {JWT_ACCESS_SECRET, ACCESS_TOKEN_EXPIRES, JWT_REFRESH_SECRET, REFRESH_TOKEN_EXPIRES} from '../secrets'
 import { SendWelcomeEmail } from '../helper/sendEmail';
-
+import { validationResult } from 'express-validator';
 
 
 export const signup = async(req: Request, res: Response) => {
+
     const{name, email, password} = req.body;
     let user = await prisma.user.findFirst({where: {email}});
     if (user) {
