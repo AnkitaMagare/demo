@@ -32,10 +32,10 @@ export const getAllProduct = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response) => {
     try {
         const id = Number(req.params.id);
-        if (isNaN(id)) {
-            res.status(400).json({error: 'invalid product id'});
-            return;
-        }
+        // if (isNaN(id)) {
+        //     res.status(400).json({error: 'invalid product id'});
+        //     return;
+        // }
         const product = await prisma.product.findUnique({where: {id}});
 
         if (!product) {
@@ -56,10 +56,10 @@ export const updateProduct = async (req: Request, res: Response) => {
         const {category} = req.body;                      
         
         
-        if (isNaN(id)) {
-            res.status(400).json({'error': 'invlaid user id'});
-            return;
-        }
+        // if (isNaN(id)) {
+        //     res.status(400).json({'error': 'invlaid user id'});
+        //     return;
+        // }
         const user = await prisma.product.update({where:{id}, data: {category}}); 
         res.status(200).json(user);
         return;
@@ -76,10 +76,10 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
     try{
     const id = Number(req.params.id);
-    if (isNaN(id)) {
-        res.status(400).json({error: 'invlaid product id'});
-        return;
-    }
+    // if (isNaN(id)) {
+    //     res.status(400).json({error: 'invlaid product id'});
+    //     return;
+    // }
 
     const productExists = await prisma.product.findUnique({
         where: {id},
