@@ -22,7 +22,7 @@ export const signup = async(req: Request, res: Response) => {
     }});
 
     // send welcome email to newly created user
-    await SendWelcomeEmail(email);
+    SendWelcomeEmail(email);
 
     res.status(201).json({user})
     return;
